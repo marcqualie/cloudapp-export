@@ -2,6 +2,7 @@
 
 A quick way to grab all the data you have stored in [CloudApp](https://www.getcloudapp.com/).
 
+
 ## Credentials
 
 The script requiests the following environment variables. These are easiest to
@@ -35,3 +36,8 @@ share_url: http://share.marcqualie.com/3a1X1J383340
 ```
 
 You can download the direct file via `remote_url`
+
+
+## LICENSE
+
+[MIT](LICENSE)
