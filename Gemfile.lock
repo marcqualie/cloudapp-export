@@ -1,0 +1,15 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    dotenv (2.2.1)
+    net-http-digest_auth (1.4.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  dotenv
+  net-http-digest_auth
+
+BUNDLED WITH
+   1.15.1
