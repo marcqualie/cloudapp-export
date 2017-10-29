@@ -4,6 +4,7 @@ PATH
     cloudapp-export (0.1.0)
       dotenv
       net-http-digest_auth
+      thor
 
 GEM
   remote: https://rubygems.org/
@@ -12,6 +13,7 @@ GEM
     minitest (5.10.3)
     net-http-digest_auth (1.4.1)
     rake (10.5.0)
+    thor (0.20.0)
 
 PLATFORMS
   ruby

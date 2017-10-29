@@ -1,3 +1,5 @@
+require 'json'
+
 module CloudappExport
   class Response
     def initialize(http_response)
