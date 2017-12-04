@@ -41,7 +41,7 @@ module CloudappExport
         else
           response = @api.request("items?per_page=100000")
           items = response.data
-          ::File.write(cache_file_path, ::JSON.pretty_generate(items))
+          ::File.write(cache_file_path, ::JSON.dump(items))
         end
         items.map do |attributes|
           ::CloudappExport::Item.new(attributes)
