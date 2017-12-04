@@ -25,6 +25,22 @@ module CloudappExport
       exporter.export_all
     end
 
+    desc :stats, "Show stats for CloudApp items"
+    option :dir, default: "#{ENV['HOME']}/Downloads/CloudappExport", type: :string
+    option :cache, type: :boolean, default: true
+    def stats
+      items = CloudappExport::ItemList.new(api, {
+        'cache' => options['cache'],
+      })
+
+      downloaded_items = items.data.select { |item| File.exist?("#{options['dir']}/#{item.filename}") }
+      downloaded_items_size = downloaded_items.sum { |item| File.size("#{options['dir']}/#{item.filename}") }
+
+      say("Dir         #{options['dir']}")
+      say("Count       #{items.count}")
+      say("Downloaded  #{downloaded_items.count}   #{(downloaded_items_size.to_f / 1_000_000).round 2} mb")
+    end
+
     desc :auth_token, "Generate auth string"
     option :username, type: :string
     option :password, type: :string

@@ -10,6 +10,11 @@ module CloudappExport
       @offset = (options['offset'] || 0).to_i
     end
 
+    def data
+      load
+      @items
+    end
+
     def count
       load
       [@items.count, @limit].min
