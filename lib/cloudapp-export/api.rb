@@ -40,11 +40,11 @@ module CloudappExport
     end
 
     def username
-      @options['username']
+      @options['username'] || raise('Username is required for API use')
     end
 
     def password
-      @options['password']
+      @options['password'] || raise('Password is required for API use')
     end
   end
 

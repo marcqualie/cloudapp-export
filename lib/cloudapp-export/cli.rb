@@ -1,8 +1,11 @@
+require "base64"
 require "fileutils"
 require "thor"
 
 module CloudappExport
   class CLI < Thor
+    class_option :auth, type: :string, description: "Base64 encoded username:password string"
+
     desc :all, "Export all data"
     option :limit, default: 5, type: :numeric
     option :dir, default: "#{ENV['HOME']}/Downloads/CloudappExport", type: :string
@@ -22,12 +25,27 @@ module CloudappExport
       exporter.export_all
     end
 
+    desc :auth_token, "Generate auth string"
+    option :username, type: :string
+    option :password, type: :string
+    def auth_token
+      username = options['username'] || ask("Username:")
+      password = options['password'] || ask("Password:", echo: false)
+      say("\n\n") unless options['password']
+      token = Base64.encode64("#{username}:#{password}")
+      say(token)
+    end
+
     no_commands do
       def api
-        @_api ||= CloudappExport::Api.new(
-          'username' => ENV['CLOUDAPP_USERNAME'],
-          'password' => ENV['CLOUDAPP_PASSWORD'],
-        )
+        @_api ||= begin
+          auth_token = Base64.decode64(options['auth'] || '')
+          username, password = auth_token.split(':')
+          CloudappExport::Api.new(
+            'username' => (username || ENV['CLOUDAPP_USERNAME']),
+            'password' => (password || ENV['CLOUDAPP_PASSWORD']),
+          )
+        end
       end
     end
   end
