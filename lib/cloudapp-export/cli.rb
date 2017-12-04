@@ -7,18 +7,9 @@ module CloudappExport
     option :limit, default: 5, type: :numeric
     option :dir, default: "#{ENV['HOME']}/Downloads/CloudappExport", type: :string
     def all
-      file_path = "../../items.json"
-      items = begin
-        if File.exist?(file_path)
-          items = JSON.parse(File.read(file_path))
-        else
-          response = api.request("items?per_page=1000")
-          items = response.data
-          File.write(file_path, JSON.pretty_generate(items))
-        end
-        items.map { |attributes| Item.new(attributes) }
-      end
-      items = items.take(options['limit'])
+      items = CloudappExport::ItemList.new(api, {
+        'limit' => options['limit'],
+      })
 
       items_dir = options['dir']
       FileUtils.mkdir_p(items_dir) unless Dir.exist?(items_dir)

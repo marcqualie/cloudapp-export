@@ -1,5 +1,7 @@
 require 'json'
 require 'net/http'
+require 'net/http/digest_auth'
+require 'open-uri'
 require 'uri'
 
 module CloudappExport
