@@ -2,13 +2,11 @@ require "json"
 
 module CloudappExport
   class ItemList
-    DEFAULT_LIMIT = 5
-
     def initialize(api, options = {})
       @api = api
       @items = []
       @use_cache = !!options['cache']
-      @limit = (options['limit'] || DEFAULT_LIMIT).to_i
+      @limit = (options['limit'] || 999_999_999).to_i
       @offset = (options['offset'] || 0).to_i
     end
 
