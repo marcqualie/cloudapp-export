@@ -11,35 +11,13 @@ module CloudappExport
         'limit' => options['limit'],
       })
 
-      items_dir = options['dir']
-      FileUtils.mkdir_p(items_dir) unless Dir.exist?(items_dir)
-
-      items_count = items.count
-      items.each do |item, index|
-        filepath = "#{items_dir}/#{item.filename}"
-        exists = File.exist?(filepath)
-        filesize = exists ? File.size(filepath) : 0
-
-        puts ""
-        puts "item:"
-        puts "  #{item.name}"
-
-        if exists
-          puts "  #{item.filename}  #{filesize}b"
-        else
-          puts "  #{item.filename}  #{filesize}b"
-          begin
-            open(filepath, 'wb') do |file|
-              file << open(item['remote_url']).read
-            end
-            puts "    [#{index.to_s.rjust(4, '0')} / #{items_count}] DL #{filepath}"
-          rescue => error
-            puts "    [#{index.to_s.rjust(4, '0')} / #{items_count}] ER #{filepath}   #{error.message}"
-            puts "              #{item['remote_url']}"
-            puts "              #{item}"
-          end
-        end
+      exporter = ::CloudappExport::Exporter.new(items, {
+        'dir' => options['dir'],
+      })
+      exporter.on_log do |message|
+        print "#{message}"
       end
+      exporter.export_all
     end
 
     no_commands do

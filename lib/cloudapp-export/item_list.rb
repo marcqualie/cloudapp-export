@@ -13,12 +13,17 @@ module CloudappExport
 
     def count
       load
-      @items.count
+      [@items.count, @limit].min
     end
 
     def each(&block)
       load
       @items[@offset..(@limit - 1)].each(&block)
+    end
+
+    def each_with_index(&block)
+      load
+      @items[@offset..(@limit - 1)].each_with_index(&block)
     end
 
     # Restrict items to a subset from 0 to $number
