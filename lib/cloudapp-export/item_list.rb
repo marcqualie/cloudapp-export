@@ -39,7 +39,7 @@ module CloudappExport
         if @use_cache && File.exist?(cache_file_path)
           items = ::JSON.parse(::File.read(cache_file_path))
         else
-          response = @api.request("items?per_page=1000")
+          response = @api.request("items?per_page=100000")
           items = response.data
           ::File.write(cache_file_path, ::JSON.pretty_generate(items))
         end
