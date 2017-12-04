@@ -12,8 +12,7 @@ module CloudappExport
         if File.exist?(file_path)
           items = JSON.parse(File.read(file_path))
         else
-          request = CloudappExport::Request.new("items?per_page=1000")
-          response = request.request
+          response = api.request("items?per_page=1000")
           items = response.data
           File.write(file_path, JSON.pretty_generate(items))
         end
@@ -49,6 +48,15 @@ module CloudappExport
             puts "              #{item}"
           end
         end
+      end
+    end
+
+    no_commands do
+      def api
+        @_api ||= CloudappExport::Api.new(
+          'username' => ENV['CLOUDAPP_USERNAME'],
+          'password' => ENV['CLOUDAPP_PASSWORD'],
+        )
       end
     end
   end
