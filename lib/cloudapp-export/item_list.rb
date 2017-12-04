@@ -7,6 +7,7 @@ module CloudappExport
     def initialize(api, options = {})
       @api = api
       @items = []
+      @use_cache = !!options['cache']
       @limit = (options['limit'] || DEFAULT_LIMIT).to_i
       @offset = (options['offset'] || 0).to_i
     end
@@ -37,7 +38,7 @@ module CloudappExport
 
     def load
       @items = begin
-        if File.exist?(cache_file_path)
+        if @use_cache && File.exist?(cache_file_path)
           items = ::JSON.parse(::File.read(cache_file_path))
         else
           response = @api.request("items?per_page=1000")

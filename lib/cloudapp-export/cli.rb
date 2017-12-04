@@ -6,9 +6,11 @@ module CloudappExport
     desc :all, "Export all data"
     option :limit, default: 5, type: :numeric
     option :dir, default: "#{ENV['HOME']}/Downloads/CloudappExport", type: :string
+    option :cache, type: :boolean, default: true
     def all
       items = CloudappExport::ItemList.new(api, {
         'limit' => options['limit'],
+        'cache' => options['cache'],
       })
 
       exporter = ::CloudappExport::Exporter.new(items, {
