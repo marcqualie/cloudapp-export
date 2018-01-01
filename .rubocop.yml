@@ -1,0 +1,38 @@
+AllCops:
+  DisplayCopNames: true
+  Exclude:
+    - 'Gemfile'
+    - 'Gemfile.lock'
+    - '*.gemspec'
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/MutableConstant:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - '**/*_test.rb'
+Metrics/MethodLength:
+  Max: 12
+  Exclude:
+    - '**/*_test.rb'
+
+# Namespace blocks contain multiple tasks
+Metrics/BlockLength:
+  Exclude:
+    - '**/*.rake'
+
+# Screens are big, even when they're small
+Metrics/LineLength:
+  Max: 120
