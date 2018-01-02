@@ -11,16 +11,18 @@ module CloudappExport
     option :dir, default: "#{ENV['HOME']}/Downloads/CloudappExport", type: :string
     option :cache, type: :boolean, default: true
     def all
-      items = CloudappExport::ItemList.new(api, {
+      items = CloudappExport::ItemList.new(
+        api,
         'limit' => options['limit'],
         'cache' => options['cache'],
-      })
+      )
 
-      exporter = ::CloudappExport::Exporter.new(items, {
+      exporter = ::CloudappExport::Exporter.new(
+        items,
         'dir' => options['dir'],
-      })
+      )
       exporter.on_log do |message|
-        print "#{message}"
+        print message
       end
       exporter.export_all
     end
@@ -29,9 +31,10 @@ module CloudappExport
     option :dir, default: "#{ENV['HOME']}/Downloads/CloudappExport", type: :string
     option :cache, type: :boolean, default: true
     def stats
-      items = CloudappExport::ItemList.new(api, {
+      items = CloudappExport::ItemList.new(
+        api,
         'cache' => options['cache'],
-      })
+      )
 
       downloaded_items = items.data.select { |item| File.exist?("#{options['dir']}/#{item.filename}") }
       downloaded_items_size = downloaded_items.sum { |item| File.size("#{options['dir']}/#{item.filename}") }

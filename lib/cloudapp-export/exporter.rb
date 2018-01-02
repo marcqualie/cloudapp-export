@@ -32,7 +32,7 @@ module CloudappExport
             file << open(item['remote_url']).read
           end
           log "  #{item_filesize_human(item)}"
-        rescue => error
+        rescue StandardError => error
           log "  ER #{error.message}"
         end
       end
@@ -52,7 +52,7 @@ module CloudappExport
 
     def item_filesize_human(item)
       filesize = item_filesize(item)
-      return '--' if filesize == 0
+      return '--' if filesize.zero?
       size_human(filesize)
     end
 

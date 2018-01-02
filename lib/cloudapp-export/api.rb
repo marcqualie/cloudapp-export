@@ -29,7 +29,7 @@ module CloudappExport
         request.add_field('Authorization', auth)
 
         # re-issue request with Authorization
-        ApiResponse.new(http.request request)
+        ApiResponse.new(http.request(request))
       end
     end
 

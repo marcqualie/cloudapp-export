@@ -33,9 +33,7 @@ module CloudappExport
     # Restrict items to a subset from 0 to $number
     # @param number [Integer] Number of items to return
     # @return Integer
-    def limit=(number)
-      @limit = number
-    end
+    attr_writer :limit
 
     protected
 

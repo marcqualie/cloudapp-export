@@ -14,6 +14,15 @@ Style/MutableConstant:
 Style/Documentation:
   Enabled: false
 
+Style/DoubleNegation:
+  Enabled: false
+
+Style/MultilineTernaryOperator:
+  Enabled: false
+
+Style/RegexpLiteral:
+  Enabled: false
+
 Style/TrailingCommaInArguments:
   EnforcedStyleForMultiline: consistent_comma
 
@@ -24,7 +33,7 @@ Style/ClassAndModuleChildren:
   Exclude:
     - '**/*_test.rb'
 Metrics/MethodLength:
-  Max: 12
+  Max: 16
   Exclude:
     - '**/*_test.rb'
 
@@ -35,4 +44,8 @@ Metrics/BlockLength:
 
 # Screens are big, even when they're small
 Metrics/LineLength:
-  Max: 120
+  Max: 130
+
+# TODO: Refactor to reduce this
+Metrics/AbcSize:
+  Max: 26
