@@ -4,6 +4,7 @@ AllCops:
     - 'Gemfile'
     - 'Gemfile.lock'
     - '*.gemspec'
+    - 'vendor/**/*'
 
 Style/StringLiterals:
   Enabled: false
