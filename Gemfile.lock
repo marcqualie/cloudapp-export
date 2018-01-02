@@ -1,15 +1,28 @@
+PATH
+  remote: .
+  specs:
+    cloudapp-export (0.1.0)
+      dotenv
+      net-http-digest_auth
+      thor
+
 GEM
   remote: https://rubygems.org/
   specs:
     dotenv (2.2.1)
+    minitest (5.11.0)
     net-http-digest_auth (1.4.1)
+    rake (10.5.0)
+    thor (0.20.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  dotenv
-  net-http-digest_auth
+  bundler (~> 1.15)
+  cloudapp-export!
+  minitest (~> 5.0)
+  rake (~> 10.0)
 
 BUNDLED WITH
-   1.15.1
+   1.16.1

@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'dotenv'
-gem 'net-http-digest_auth'
+git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
+
+# Specify your gem's dependencies in cloudapp-export.gemspec
+gemspec

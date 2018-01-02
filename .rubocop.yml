@@ -1,0 +1,52 @@
+AllCops:
+  DisplayCopNames: true
+  Exclude:
+    - 'Gemfile'
+    - 'Gemfile.lock'
+    - '*.gemspec'
+    - 'vendor/**/*'
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/MutableConstant:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/MultilineTernaryOperator:
+  Enabled: false
+
+Style/RegexpLiteral:
+  Enabled: false
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - '**/*_test.rb'
+Metrics/MethodLength:
+  Max: 16
+  Exclude:
+    - '**/*_test.rb'
+
+# Namespace blocks contain multiple tasks
+Metrics/BlockLength:
+  Exclude:
+    - '**/*.rake'
+
+# Screens are big, even when they're small
+Metrics/LineLength:
+  Max: 130
+
+# TODO: Refactor to reduce this
+Metrics/AbcSize:
+  Max: 26
