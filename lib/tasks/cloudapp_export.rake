@@ -1,6 +1,6 @@
 require 'dotenv'
 require 'json'
-require 'cloudapp-export'
+require 'cloudapp_export'
 
 namespace :cloudapp do
   desc "Export data from CloudApp"
