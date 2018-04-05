@@ -13,3 +13,4 @@ items.json
 /pkg/
 /spec/reports/
 /tmp/
+.ruby-version
