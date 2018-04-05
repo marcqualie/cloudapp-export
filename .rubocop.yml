@@ -6,6 +6,9 @@ AllCops:
     - '*.gemspec'
     - 'vendor/**/*'
 
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 Style/StringLiterals:
   Enabled: false
 
