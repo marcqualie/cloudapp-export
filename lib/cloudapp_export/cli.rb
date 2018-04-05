@@ -4,7 +4,8 @@ require "thor"
 
 module CloudappExport
   class CLI < Thor
-    class_option :auth, type: :string, description: "Base64 encoded username:password string"
+    class_option :username, type: :string, description: "Account username"
+    class_option :password, type: :string, description: "Account password (not recommended to pass via command line)"
 
     desc :all, "Export all data"
     option :limit, default: 5, type: :numeric
@@ -44,26 +45,32 @@ module CloudappExport
       say("Downloaded  #{downloaded_items.count}   #{(downloaded_items_size.to_f / 1_000_000).round 2} mb")
     end
 
-    desc :auth_token, "Generate auth string"
-    option :username, type: :string
-    option :password, type: :string
-    def auth_token
-      username = options['username'] || ask("Username:")
-      password = options['password'] || ask("Password:", echo: false)
-      say("\n\n") unless options['password']
-      token = Base64.encode64("#{username}:#{password}")
-      say(token)
-    end
-
     no_commands do
       def api
         @_api ||= begin
-          auth_token = Base64.decode64(options['auth'] || '')
-          username, password = auth_token.split(':')
           CloudappExport::Api.new(
-            'username' => (username || ENV['CLOUDAPP_USERNAME']),
-            'password' => (password || ENV['CLOUDAPP_PASSWORD']),
+            'username' => username,
+            'password' => password,
           )
+        end
+      end
+
+      def username
+        @username ||= begin
+          username = options['username']
+          username ||= ENV['CLOUDAPP_USERNAME']
+          username ||= ask("Username:")
+          username || raise("Username is required")
+        end
+      end
+
+      def password
+        say("WARNING: Passing password via the command line is not recommended!", :yellow) if options['password']
+        @password ||= begin
+          password = options['password']
+          password ||= ENV['CLOUDAPP_PASSWORD']
+          password ||= ask("Password:", echo: false)
+          password || raise("Password is required")
         end
       end
     end
