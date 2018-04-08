@@ -27,10 +27,17 @@ Style/MultilineTernaryOperator:
 Style/RegexpLiteral:
   Enabled: false
 
+# Screens are big, even when they're small
+Metrics/LineLength:
+  Enabled: false
+
 Style/TrailingCommaInArguments:
   EnforcedStyleForMultiline: consistent_comma
 
-Style/TrailingCommaInLiteral:
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
 
 Style/ClassAndModuleChildren:
@@ -45,10 +52,6 @@ Metrics/MethodLength:
 Metrics/BlockLength:
   Exclude:
     - '**/*.rake'
-
-# Screens are big, even when they're small
-Metrics/LineLength:
-  Max: 130
 
 # TODO: Refactor to reduce this
 Metrics/AbcSize:

@@ -47,7 +47,7 @@ module CloudappExport
 
     no_commands do
       def api
-        @_api ||= begin
+        @api ||= begin
           CloudappExport::Api.new(
             'username' => username,
             'password' => password,

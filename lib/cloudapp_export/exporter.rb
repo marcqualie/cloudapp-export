@@ -28,8 +28,8 @@ module CloudappExport
       else
         begin
           log "  DL"
-          open(filepath, 'wb') do |file|
-            file << open(item['remote_url']).read
+          File.open(filepath, 'wb') do |file|
+            file << File.open(item['remote_url']).read
           end
           log "  #{item_filesize_human(item)}"
         rescue StandardError => error
