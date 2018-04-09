@@ -54,6 +54,7 @@ module CloudappExport
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Layout/TrailingWhitespace
 
+    # rubocop:disable Metrics/BlockLength
     no_commands do
       def api
         @api ||= begin
@@ -67,7 +68,7 @@ module CloudappExport
       def authenticate!
         api.authenticate!
         say("Successfully authenticated!", :green)
-      rescue => error
+      rescue StandardError => error
         say("Could not authenticate with Cloudapp (#{error.message})", :red)
         Kernel.exit
       end
@@ -91,5 +92,6 @@ module CloudappExport
         end
       end
     end
+    # rubocop:enable Metrics/BlockLength
   end
 end

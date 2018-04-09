@@ -14,10 +14,9 @@ module CloudappExport
 
     def authenticate!
       response = request("items?per_page=1")
-      if response.status_code != 200
-        # TODO: Use custom exception classes
-        raise response.body.strip
-      end
+      return true if response.status_code == 200
+      # TODO: Use custom exception classes
+      raise response.body.strip
     end
 
     def request(path)
