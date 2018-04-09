@@ -17,9 +17,9 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "dotenv"
-  spec.add_dependency "net-http-digest_auth"
-  spec.add_dependency "thor"
+  spec.add_dependency "dotenv", "2.2.1"
+  spec.add_dependency "net-http-digest_auth", "1.4.1"
+  spec.add_dependency "thor", "0.20.0"
 
   spec.add_development_dependency "bundler", "~> 1.16"
   spec.add_development_dependency "rake", "~> 12.3"
