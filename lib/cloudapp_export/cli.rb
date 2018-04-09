@@ -12,6 +12,8 @@ module CloudappExport
     option :dir, default: "#{ENV['HOME']}/Downloads/CloudappExport", type: :string, desc: "Directory to download all files to"
     option :cache, type: :boolean, default: true
     def all
+      authenticate!
+
       items = CloudappExport::ItemList.new(
         api,
         'limit' => options['limit'],
@@ -34,6 +36,8 @@ module CloudappExport
     option :dir, default: "#{ENV['HOME']}/Downloads/CloudappExport", type: :string, desc: "Directory where your files were downloaded to"
     option :cache, type: :boolean, default: true
     def stats
+      authenticate!
+
       items = CloudappExport::ItemList.new(
         api,
         'cache' => options['cache'],
@@ -58,6 +62,14 @@ module CloudappExport
             'password' => password,
           )
         end
+      end
+
+      def authenticate!
+        api.authenticate!
+        say("Successfully authenticated!", :green)
+      rescue => error
+        say("Could not authenticate with Cloudapp (#{error.message})", :red)
+        Kernel.exit
       end
 
       def username

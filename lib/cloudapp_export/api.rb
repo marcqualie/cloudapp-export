@@ -12,6 +12,14 @@ module CloudappExport
       @options = options
     end
 
+    def authenticate!
+      response = request("items?per_page=1")
+      if response.status_code != 200
+        # TODO: Use custom exception classes
+        raise response.body.strip
+      end
+    end
+
     def request(path)
       digest_auth = Net::HTTP::DigestAuth.new
       uri = URI.parse("https://#{host}/v3/#{path}")
@@ -55,6 +63,10 @@ module CloudappExport
 
     def body
       @http_response.body
+    end
+
+    def status_code
+      @http_response.code.to_i
     end
 
     def data
