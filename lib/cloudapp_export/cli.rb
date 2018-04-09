@@ -10,7 +10,7 @@ module CloudappExport
     desc :all, "Export all data from your Cloudapp account"
     option :limit, default: 5, type: :numeric
     option :dir, default: "#{ENV['HOME']}/Downloads/CloudappExport", type: :string, desc: "Directory to download all files to"
-    option :cache, type: :boolean, default: true
+    option :cache, type: :boolean, default: false
     def all
       authenticate!
 
@@ -34,7 +34,7 @@ module CloudappExport
     # rubocop:disable Layout/TrailingWhitespace
     desc :stats, "Show stats for CloudApp items"
     option :dir, default: "#{ENV['HOME']}/Downloads/CloudappExport", type: :string, desc: "Directory where your files were downloaded to"
-    option :cache, type: :boolean, default: true
+    option :cache, type: :boolean, default: false
     def stats
       authenticate!
 
