@@ -19,6 +19,7 @@ module CloudappExport
         'limit' => options['limit'],
         'cache' => options['cache'],
       )
+      say("Account contains #{set_color items.total_count, :bold} items")
 
       exporter = ::CloudappExport::Exporter.new(
         items,

@@ -16,8 +16,12 @@ module CloudappExport
     end
 
     def count
-      load
-      [@items.count, @limit].min
+      [total_count, @limit].min
+    end
+
+    def total_count
+      load_meta
+      @meta['count'].to_i
     end
 
     def each(&block)
@@ -49,6 +53,13 @@ module CloudappExport
         items.map do |attributes|
           ::CloudappExport::Item.new(attributes)
         end
+      end
+    end
+
+    def load_meta
+      @load_meta ||= begin
+        response = @api.request("items?per_page=1")
+        @meta = response.meta
       end
     end
 

@@ -71,5 +71,9 @@ module CloudappExport
     def data
       JSON.parse(@http_response.body)['data']
     end
+
+    def meta
+      JSON.parse(@http_response.body)['meta']
+    end
   end
 end
