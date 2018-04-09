@@ -28,10 +28,7 @@ module CloudappExport
       else
         begin
           log "  DL"
-          File.open(filepath, 'wb') do |file|
-            remote_uri = URI(item['remote_url'])
-            file << Net::HTTP.get(remote_uri)
-          end
+          copy_file(item['remote_url'], filepath)
           log "  #{item_filesize_human(item)}"
         rescue StandardError => error
           log "  ER #{error.message}"
@@ -45,6 +42,13 @@ module CloudappExport
     end
 
     protected
+
+    def copy_file(remote_url, local_path)
+      remote_uri = URI(remote_url)
+      File.open(local_path, 'wb') do |file|
+        file << Net::HTTP.get(remote_uri)
+      end
+    end
 
     def item_filesize(item)
       filepath = "#{download_dir}/#{item.filename}"
