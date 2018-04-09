@@ -14,3 +14,4 @@ items.json
 /spec/reports/
 /tmp/
 .ruby-version
+*.gem
