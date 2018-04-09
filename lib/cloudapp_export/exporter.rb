@@ -29,7 +29,8 @@ module CloudappExport
         begin
           log "  DL"
           File.open(filepath, 'wb') do |file|
-            file << File.open(item['remote_url']).read
+            remote_uri = URI(item['remote_url'])
+            file << Net::HTTP.get(remote_uri)
           end
           log "  #{item_filesize_human(item)}"
         rescue StandardError => error
