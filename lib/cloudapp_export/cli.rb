@@ -69,7 +69,7 @@ module CloudappExport
         @password ||= begin
           password = options['password']
           password ||= ENV['CLOUDAPP_PASSWORD']
-          password ||= ask("Password:", echo: false)
+          password ||= (ask("Password:", echo: false) && say('*' * 20))
           password || raise("Password is required")
         end
       end
