@@ -27,6 +27,10 @@ Style/MultilineTernaryOperator:
 Style/RegexpLiteral:
   Enabled: false
 
+# TODO: Figure out how to do this without URI.encode
+Lint/UriEscapeUnescape:
+  Enabled: false
+
 # Screens are big, even when they're small
 Metrics/LineLength:
   Enabled: false

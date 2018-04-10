@@ -34,9 +34,7 @@ module CloudappExport
           log "  #{item_filesize_human(item)}"
         rescue StandardError => error
           log "  ER #{error.message}\n"
-          error.backtrace.each do |line|
-            log "          #{line}\n"
-          end
+          error.backtrace.each { |line| log "          #{line}\n" }
         end
       end
       log "\n"
@@ -49,7 +47,7 @@ module CloudappExport
     protected
 
     def copy_file(remote_url, local_path)
-      remote_uri = URI(URI.encode(remote_url, '[]'))
+      remote_uri = URI.parse(URI.encode(remote_url, '[]'))
       File.open(local_path, 'wb') do |file|
         file << Net::HTTP.get(remote_uri)
       end

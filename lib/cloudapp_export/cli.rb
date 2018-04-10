@@ -34,7 +34,6 @@ module CloudappExport
     end
 
     # rubocop:disable Metrics/AbcSize
-    # rubocop:disable Layout/TrailingWhitespace
     desc :stats, "Show stats for CloudApp items"
     option :dir, default: "#{ENV['HOME']}/Downloads/CloudappExport", type: :string, desc: "Directory where your files were downloaded to"
     option :cache, type: :boolean, default: false
@@ -58,7 +57,6 @@ module CloudappExport
       say("            #{(downloaded_items_size.to_f / 1_000_000).round 2} mb")
     end
     # rubocop:enable Metrics/AbcSize
-    # rubocop:enable Layout/TrailingWhitespace
 
     # rubocop:disable Metrics/BlockLength
     no_commands do
