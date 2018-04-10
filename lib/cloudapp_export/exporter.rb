@@ -25,13 +25,18 @@ module CloudappExport
       filepath = "#{download_dir}/#{item.filename}"
       if File.exist?(filepath)
         log "  SK  #{item_filesize_human(item)}"
+      elsif item['remote_url'].nil? || item['item_type'] == 'pending'
+        log "  SK  No Remote URL"
       else
         begin
           log "  DL"
           copy_file(item['remote_url'], filepath)
           log "  #{item_filesize_human(item)}"
         rescue StandardError => error
-          log "  ER #{error.message}"
+          log "  ER #{error.message}\n"
+          error.backtrace.each do |line|
+            log "          #{line}\n"
+          end
         end
       end
       log "\n"
@@ -44,10 +49,13 @@ module CloudappExport
     protected
 
     def copy_file(remote_url, local_path)
-      remote_uri = URI(remote_url)
+      remote_uri = URI(URI.encode(remote_url, '[]'))
       File.open(local_path, 'wb') do |file|
         file << Net::HTTP.get(remote_uri)
       end
+    rescue StandardError => error
+      File.delete(local_path)
+      raise error
     end
 
     def item_filesize(item)
