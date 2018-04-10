@@ -17,9 +17,11 @@ module CloudappExport
       items = CloudappExport::ItemList.new(
         api,
         'limit' => options['limit'],
-        'cache' => options['cache'],
+        'use_cache' => options['cache'],
+        'cache_key' => "#{username}:#{options['limit']}",
       )
       say("Account contains #{set_color items.total_count, :bold} items")
+      say("", nil, true)
 
       exporter = ::CloudappExport::Exporter.new(
         items,
@@ -41,14 +43,17 @@ module CloudappExport
 
       items = CloudappExport::ItemList.new(
         api,
-        'cache' => options['cache'],
       )
-      
+      say("Account contains #{set_color items.total_count, :bold} items")
+      say("", nil, true)
+
+      say("Dir         #{options['dir']}")
+      say("", nil, true)
+
+      # TODO: Just count files directly in local folder
       downloaded_items = items.data.select { |item| File.exist?("#{options['dir']}/#{item.filename}") }
       downloaded_items_size = downloaded_items.inject(0) { |sum, item| sum + File.size("#{options['dir']}/#{item.filename}") }
-      
-      say("Dir         #{options['dir']}")
-      say("Items       #{items.count}")
+
       say("Downloaded  #{downloaded_items.count}")
       say("            #{(downloaded_items_size.to_f / 1_000_000).round 2} mb")
     end

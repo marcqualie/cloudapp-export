@@ -1,11 +1,13 @@
 require "json"
+require "digest"
 
 module CloudappExport
   class ItemList
     def initialize(api, options = {})
       @api = api
       @items = []
-      @use_cache = !!options['cache']
+      @cache_key = options['cache_key']
+      @use_cache = options['use_cache']
       @limit = (options['limit'] || 999_999_999).to_i
       @offset = (options['offset'] || 0).to_i
     end
@@ -46,9 +48,9 @@ module CloudappExport
         if @use_cache && File.exist?(cache_file_path)
           items = ::JSON.parse(::File.read(cache_file_path))
         else
-          response = @api.request("items?per_page=100000")
+          response = @api.request("items?per_page=#{@limit}")
           items = response.data
-          ::File.write(cache_file_path, ::JSON.dump(items))
+          ::File.write(cache_file_path, ::JSON.dump(items)) if @cache_key
         end
         items.map do |attributes|
           ::CloudappExport::Item.new(attributes)
@@ -64,7 +66,8 @@ module CloudappExport
     end
 
     def cache_file_path
-      "#{ENV['HOME']}/.cloudapp-export-items.json"
+      hashed_cache_key = Digest::MD5.hexdigest(@cache_key)
+      "/tmp/cloudapp-export-items-cache-#{hashed_cache_key}.json"
     end
   end
 end

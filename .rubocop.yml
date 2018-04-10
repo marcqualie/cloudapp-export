@@ -44,7 +44,7 @@ Style/ClassAndModuleChildren:
   Exclude:
     - '**/*_test.rb'
 Metrics/MethodLength:
-  Max: 16
+  Max: 18
   Exclude:
     - '**/*_test.rb'
 
