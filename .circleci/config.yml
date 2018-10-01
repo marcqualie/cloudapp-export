@@ -16,8 +16,6 @@ jobs:
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "Gemfile.lock" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
 
       - run:
           name: install dependencies
@@ -33,4 +31,12 @@ jobs:
       - run:
           name: run tests
           command: |
-            rake
+            bundle exec rake
+
+      - run:
+          name: Upload Code Coverage
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+            ./cc-test-reporter format-coverage
+            ./cc-test-reporter upload-coverage
