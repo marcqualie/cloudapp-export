@@ -64,6 +64,7 @@ module CloudappExport
     def item_filesize_human(item)
       filesize = item_filesize(item)
       return '--' if filesize.zero?
+
       size_human(filesize)
     end
 
