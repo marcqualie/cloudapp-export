@@ -1,5 +1,9 @@
 # CloudApp Export
 
+[![CircleCI](https://circleci.com/gh/marcqualie/cloudapp-export.svg?style=svg)](https://circleci.com/gh/marcqualie/cloudapp-export)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1a0c70e2d6043ef9570a/maintainability)](https://codeclimate.com/github/marcqualie/cloudapp-export/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/1a0c70e2d6043ef9570a/test_coverage)](https://codeclimate.com/github/marcqualie/cloudapp-export/test_coverage)
+
 A quick way to grab all the data you have stored in [CloudApp](https://www.getcloudapp.com/).
 
 
