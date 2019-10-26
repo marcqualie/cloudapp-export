@@ -19,13 +19,14 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = ">= 2.3.3"
 
-  spec.add_dependency "dotenv", "2.5.0"
+  spec.add_dependency "dotenv", "2.7.5"
   spec.add_dependency "net-http-digest_auth", "1.4.1"
-  spec.add_dependency "thor", "0.20.0"
+  spec.add_dependency "thor", "0.20.3"
 
-  spec.add_development_dependency "bundler", "~> 1.16"
-  spec.add_development_dependency "minitest", "~> 5.11"
-  spec.add_development_dependency "rake", "~> 12.3"
-  spec.add_development_dependency "rubocop", "~> 0.59.2"
-  spec.add_development_dependency "simplecov", "~> 0.16.1"
+  spec.add_development_dependency "bundler", "~> 1.17.3"
+  spec.add_development_dependency "minitest", "~> 5.12.2"
+  spec.add_development_dependency "rake", "~> 13.0"
+  spec.add_development_dependency "rubocop", "~> 0.75.1"
+  spec.add_development_dependency "simplecov", "~> 0.17.1"
+  spec.add_development_dependency "simplecov-lcov", "> 0"
 end

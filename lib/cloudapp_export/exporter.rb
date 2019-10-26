@@ -32,9 +32,9 @@ module CloudappExport
           log "  DL"
           copy_file(item['remote_url'], filepath)
           log "  #{item_filesize_human(item)}"
-        rescue StandardError => error
-          log "  ER #{error.message}\n"
-          error.backtrace.each { |line| log "          #{line}\n" }
+        rescue StandardError => e
+          log "  ER #{e.message}\n"
+          e.backtrace.each { |line| log "          #{line}\n" }
         end
       end
       log "\n"
@@ -51,9 +51,9 @@ module CloudappExport
       File.open(local_path, 'wb') do |file|
         file << Net::HTTP.get(remote_uri)
       end
-    rescue StandardError => error
+    rescue StandardError => e
       File.delete(local_path)
-      raise error
+      raise e
     end
 
     def item_filesize(item)
