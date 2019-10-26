@@ -72,8 +72,8 @@ module CloudappExport
       def authenticate!
         api.authenticate!
         say("Successfully authenticated!", :green)
-      rescue StandardError => error
-        say("Could not authenticate with Cloudapp (#{error.message})", :red)
+      rescue StandardError => e
+        say("Could not authenticate with Cloudapp (#{e.message})", :red)
         Kernel.exit
       end
 
