@@ -14,7 +14,7 @@ GEM
     dotenv (2.7.5)
     jaro_winkler (1.5.3)
     json (2.2.0)
-    minitest (5.12.2)
+    minitest (5.13.0)
     net-http-digest_auth (1.4.1)
     parallel (1.18.0)
     parser (2.6.5.0)
@@ -44,7 +44,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.17.3)
   cloudapp-export!
-  minitest (~> 5.12.2)
+  minitest (~> 5.13.0)
   rake (~> 13.0)
   rubocop (~> 0.75.1)
   simplecov (~> 0.17.1)
