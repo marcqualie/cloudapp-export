@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = ">= 2.3.3"
 
-  spec.add_dependency "dotenv", "2.7.5"
+  spec.add_dependency "dotenv", "2.7.6"
   spec.add_dependency "net-http-digest_auth", "1.4.1"
   spec.add_dependency "thor", "1.0.1"
 
